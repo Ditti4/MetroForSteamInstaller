@@ -14,6 +14,7 @@ Public Class mainwindow
     Dim first As Integer
     Dim length As Integer
     Dim cookies As New CookieContainer
+    Dim prevloc As Point
 
     Private Sub mainwindow_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         '
@@ -82,7 +83,7 @@ Public Class mainwindow
         'Compare currentversion and newversion, give advice afterwards
         '
         If newversion.Equals(currentversion) Then
-            updatenotice.Text = "All good, you alreday have the newest version."
+            updatenotice.Text = "All good, you already have the newest version."
             updatenotice.ForeColor = System.Drawing.Color.FromArgb(130, 186, 0)
         Else
             updatenotice.Text = "Newer version available, you should update."
@@ -141,5 +142,25 @@ Public Class mainwindow
         Catch exc As Exception
             MessageBox.Show(exc.ToString, "Oops!", MessageBoxButtons.OK)
         End Try
+    End Sub
+
+    Private Sub closebutton_Click(sender As Object, e As EventArgs) Handles closebutton.Click
+        Close()
+    End Sub
+
+    Private Sub minimizebutton_Click(sender As Object, e As EventArgs) Handles minimizebutton.Click
+        Me.WindowState = FormWindowState.Minimized
+    End Sub
+
+    Private Sub titlebar_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles titlebar.MouseDown
+        If e.Button = Windows.Forms.MouseButtons.Left Then
+            prevloc = e.Location
+        End If
+    End Sub
+
+    Private Sub titlebar_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles titlebar.MouseMove
+        If e.Button = Windows.Forms.MouseButtons.Left Then
+            Me.Location += e.Location - prevloc
+        End If
     End Sub
 End Class
