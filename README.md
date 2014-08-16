@@ -1,5 +1,5 @@
-MetroForSteamInstaller
-======================
+MetroForSteamInstaller (Visual Basic .NET)
+==========================================
 Installer for the Metro for Steam skin for Steam (http://metroforsteam.com), currently being very alpha.
 Feel free to clone and compile it. That's what the MetroInstaller.sln file is for.
 
