@@ -58,5 +58,14 @@ Public Class mainwindow
         Catch exc As WebException
             MessageBox.Show(exc.Message + exc.ToString, "Oops!", MessageBoxButtons.OK)
         End Try
+
+        If newversion.Equals(currentversion) Then
+            updatenotice.Text = "All good, you alreday have the newest version."
+            updatenotice.ForeColor = System.Drawing.Color.FromArgb(130, 186, 0)
+        Else
+            updatenotice.Text = "Newer version available, you should update."
+            updatenotice.ForeColor = System.Drawing.Color.FromArgb(93, 178, 255)
+        End If
+
     End Sub
 End Class
