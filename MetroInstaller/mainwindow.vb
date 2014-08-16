@@ -182,4 +182,16 @@ Public Class mainwindow
             Me.Location += e.Location - prevloc
         End If
     End Sub
+
+    Private Sub title_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles title.MouseDown
+        If e.Button = Windows.Forms.MouseButtons.Left Then
+            prevloc = e.Location
+        End If
+    End Sub
+
+    Private Sub title_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles title.MouseMove
+        If e.Button = Windows.Forms.MouseButtons.Left Then
+            Me.Location += e.Location - prevloc
+        End If
+    End Sub
 End Class
