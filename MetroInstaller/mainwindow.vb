@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports System.IO.Compression
 Imports System.Text.RegularExpressions
 Imports System.Net
 Imports System.Text
@@ -112,9 +113,33 @@ Public Class mainwindow
             '
             'Next: unzipping
             '
-
-        Catch exc As WebException
-            MessageBox.Show(exc.Message + exc.ToString, "Oops!", MessageBoxButtons.OK)
+            System.IO.Directory.CreateDirectory("mfsstuff")
+            Dim zip As String = "mfs.zip"
+            Dim dest As String = "mfsstuff"
+            ZipFile.ExtractToDirectory(zip, dest)
+            '
+            'Check if user wants to overwrite their custom.styles
+            '
+            If Not overwritecheckbox.Checked Then
+                IO.File.Delete("mfsstuff\Metro for Steam\custom.styles")
+            End If
+            '
+            'Copy the skin to the skins folder in the Steam install path
+            '
+            FileIO.FileSystem.CopyDirectory("mfsstuff\Metro for Steam", installpath + "\skins\Metro for Steam")
+            '
+            'Delete all the trash we created
+            '
+            IO.File.Delete("mfs.zip")
+            IO.Directory.Delete("mfsstuff", True)
+            '
+            'Inform the user we're done
+            '
+            updatenotice.Text = "Done. Have fun!"
+            updatenotice.ForeColor = System.Drawing.Color.FromArgb(130, 186, 0)
+            overwritecheckbox.Checked = False
+        Catch exc As Exception
+            MessageBox.Show(exc.ToString, "Oops!", MessageBoxButtons.OK)
         End Try
     End Sub
 End Class
