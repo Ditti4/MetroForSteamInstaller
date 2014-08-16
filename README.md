@@ -7,6 +7,10 @@ Building
 --------
 As the opening paragraph says: open MetroInstaller.sln with Visual Studio (I used the 2013 Express version), compile it, have fun.
 
+Download
+--------
+Here you go: http://dl.riditt.de/MetroInstaller.exe
+
 Disclaimer
 ----------
 
