@@ -89,7 +89,10 @@ Public Class mainwindow
             updatenotice.Text = "Newer version available, you should update."
             updatenotice.ForeColor = System.Drawing.Color.FromArgb(93, 178, 255)
         End If
-
+        '
+        'Set focus onto something that doesn't matter so the user doesn't accidentally install the skin by pressing enter
+        '
+        updatenotice.Focus()
     End Sub
 
     Private Sub updatebutton_Click(sender As Object, e As EventArgs) Handles updatebutton.Click
@@ -144,12 +147,28 @@ Public Class mainwindow
         End Try
     End Sub
 
+    Private Sub updatebutton_MouseLeave(sender As Object, e As EventArgs) Handles updatebutton.MouseLeave
+        updatenotice.Focus()
+    End Sub
+
+    Private Sub overwritecheckbox_MouseLeave(sender As Object, e As EventArgs) Handles overwritecheckbox.MouseLeave
+        updatenotice.Focus()
+    End Sub
+
     Private Sub closebutton_Click(sender As Object, e As EventArgs) Handles closebutton.Click
         Close()
     End Sub
 
+    Private Sub closebutton_MouseLeave(sender As Object, e As EventArgs) Handles closebutton.MouseLeave
+        updatenotice.Focus()
+    End Sub
+
     Private Sub minimizebutton_Click(sender As Object, e As EventArgs) Handles minimizebutton.Click
         Me.WindowState = FormWindowState.Minimized
+    End Sub
+
+    Private Sub minimizebutton_MouseLeave(sender As Object, e As EventArgs) Handles minimizebutton.MouseLeave
+        updatenotice.Focus()
     End Sub
 
     Private Sub titlebar_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles titlebar.MouseDown
