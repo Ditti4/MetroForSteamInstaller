@@ -117,6 +117,9 @@ Public Class mainwindow
             '
             'Next: unzipping
             '
+            If IO.Directory.Exists("mfsstuff") Then
+                IO.Directory.Delete("mfsstuff", True)
+            End If
             System.IO.Directory.CreateDirectory("mfsstuff")
             Dim zip As String = "mfs.zip"
             Dim dest As String = "mfsstuff"
@@ -130,7 +133,7 @@ Public Class mainwindow
             '
             'Copy the skin to the skins folder in the Steam install path
             '
-            FileIO.FileSystem.CopyDirectory("mfsstuff\Metro for Steam", installpath + "\skins\Metro for Steam")
+            FileIO.FileSystem.CopyDirectory("mfsstuff\Metro for Steam", installpath + "\skins\Metro for Steam", True)
             '
             'Delete all the trash we created
             '
@@ -139,6 +142,11 @@ Public Class mainwindow
             '
             'Inform the user we're done
             '
+            filestring = File.ReadAllText(installpath + "\skins\Metro for Steam\resource\menus\steam.menu")
+            first = filestring.IndexOf("Steam - ") + 8
+            length = filestring.IndexOf("""", first) - first
+            currentversion = filestring.Substring(first, length)
+            currentversionlabel.Text = currentversion
             updatenotice.Text = "Done. Have fun!"
             updatenotice.ForeColor = System.Drawing.Color.FromArgb(130, 186, 0)
             overwritecheckbox.Checked = False
